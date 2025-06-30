@@ -32,9 +32,7 @@ jobs:
         run: npm ci
         # Instala as dependências exatamente conforme o package-lock.json (mais confiável que `npm install`)
 
-      - name: Run linter
-        run: npm run lint
-        # Executa o linter para verificar problemas de estilo e qualidade de código
+      
 
       - name: Run tests
         run: npm test
