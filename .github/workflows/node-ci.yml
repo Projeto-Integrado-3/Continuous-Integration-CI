@@ -1,0 +1,41 @@
+# Nome do workflow que aparecerá na aba de Actions do GitHub
+name: Node.js CI
+
+# Define os eventos que irão acionar este workflow
+on:
+  push:
+    branches: [main]       # Executa o workflow em pushs feitos na branch main
+  pull_request:
+    branches: [main]       # Executa o workflow em pull requests abertos para a branch main
+
+# Define os jobs (tarefas) que serão executadas
+jobs:
+  build-and-test:           # Nome do job
+    runs-on: ubuntu-latest  # Define o ambiente do job: última versão do Ubuntu
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]  # Executa o job em duas versões diferentes do Node.js (18 e 20)
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        # Faz o checkout do código-fonte do repositório na máquina virtual
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}  # Define a versão do Node.js da matriz
+          cache: 'npm'                              # Habilita cache de dependências npm para acelerar builds
+
+      - name: Install dependencies
+        run: npm ci
+        # Instala as dependências exatamente conforme o package-lock.json (mais confiável que `npm install`)
+
+      - name: Run linter
+        run: npm run lint
+        # Executa o linter para verificar problemas de estilo e qualidade de código
+
+      - name: Run tests
+        run: npm test
+        # Executa os testes definidos no projeto (geralmente via Jest, Mocha, etc.)

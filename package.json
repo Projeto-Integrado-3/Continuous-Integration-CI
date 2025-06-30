@@ -1,0 +1,16 @@
+{
+  "name": "continuous-integration-ci",
+  "version": "1.0.0",
+  "description": "Este projeto foi desenvolvido como o primeiro entregável da disciplina Projeto Integrado IV, ofertada no semestre 2025.1 do curso de Análise e Desenvolvimento de Sistemas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint ."
+  },
+  "author": "Equipe-Projeto Integrado IV",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^9.30.0",
+    "jest": "^30.0.3"
+  }
+}
